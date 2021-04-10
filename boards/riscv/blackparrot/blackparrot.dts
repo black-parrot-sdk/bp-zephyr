@@ -1,0 +1,70 @@
+
+/dts-v1/;
+
+/ {
+    #address-cells = <2>;
+    #size-cells = <2>;
+    model = "BlackParrot";
+	compatible = "blackparrot";
+
+    clocks {
+        coreclk: core-clk {
+            #clock-cells = <0>;
+            compatible = "fixed-clock";
+            clock-frequency = <1000000000>;
+            status = "okay";
+        };
+    };
+
+	cpus {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		CPU0: cpu@0 {
+			compatible = "riscv";
+			device_type = "cpu";
+			reg = <0x0>;
+			riscv,isa = "rv64imafdc_Zicsr_Zifencei";
+			mmu-type = "riscv,sv39";
+			clock-frequency = <1000000000>;
+			status = "okay";
+
+            hlic0: interrupt-controller {
+                compatible = "riscv,cpu-intc";
+                #address-cells = <0>;
+                #interrupt-cells = <1>;
+                interrupt-controller;
+            };
+		};
+	};
+	soc {
+        #address-cells = <2>;
+        #size-cells = <2>;
+        compatible = "simple-bus";
+        ranges;
+        clint0: clint@300000 {
+            compatible = "sifive,clint0";
+            interrupts-extended = <&hlic0 0x03 &hlic0 0x07>;
+            reg = <0x0 0x300000 0x0 0x100000>;
+        };
+        uart0: serial@101000 {
+            compatible = "ns16550";
+            interrupt-parent = <&hlic0>;
+            interrupts = <4 1>;
+            reg = <0x0 0x101000 0x0 0x1000>;
+            reg-shift = <0>;
+            clock-frequency = <1000000000>;
+            status = "okay";
+        };
+        ram0: memory@80000000 {
+            device_type = "memory";
+            reg = <0x0 0x80000000 0x0 0x4000000>;
+            status = "okay";
+        };
+    };
+    chosen {
+        zephyr,console = &uart0;
+        zephyr,shell-uart = &uart0;
+        zephyr,sram = &ram0;
+    };
+};
+

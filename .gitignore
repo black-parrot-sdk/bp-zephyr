@@ -1,0 +1,10 @@
+.west/
+bootloader/
+modules/
+tools/
+zephyrproject/
+Python-*
+*.riscv
+.venv/
+zephyr-sdk*
+zephyr/
