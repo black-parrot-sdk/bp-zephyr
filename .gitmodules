@@ -1,0 +1,6 @@
+[submodule "zephyr"]
+    path = zephyr
+    url = https://github.com/black-parrot-sdk/zephyr
+    branch = blackparrot_mods
+    ignore = dirty
+
