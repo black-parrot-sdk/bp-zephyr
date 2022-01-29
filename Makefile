@@ -24,7 +24,7 @@ build: $(ZEPHYR_RISCV)
 zephyr:
 	git submodule update --init --recursive $(ZEPHYR_DIR)
 	rm -rf $(ZEPHYR_DIR)/.west
-	cd $(ZEPHYR_DIR); $(WEST) init -m $(ZEPHYR_URL) --mr $(ZEPHYR_BRANCH)
+	$(WEST) init -l $(ZEPHYR_DIR)
 	cd $(ZEPHYR_DIR); $(WEST) update
 
 ZEPHYR_ELF ?= $(ZEPHYR_DIR)/build/zephyr/zephyr.elf
