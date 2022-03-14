@@ -11,25 +11,20 @@ WEST ?= west
 BOARD ?= blackparrot
 APPLICATION ?= samples/synchronization
 
+export ZEPHYR_BASE              := $(ZEPHYR_DIR)
 export ZEPHYR_TOOLCHAIN_VARIANT := cross-compile
 export TOOLCHAIN                := riscv64-unknown-elf-dramfs-
 export CROSS_COMPILE            := $(BP_SDK_BIN_DIR)/$(TOOLCHAIN)
 
-ZEPHYR_URL := https://github.com/black-parrot-sdk/zephyr
-ZEPHYR_BRANCH := blackparrot_mods
+ZEPHYR_ELF ?= $(ZEPHYR_DIR)/build/zephyr/zephyr.elf
+all: $(ZEPHYR_ELF)
 
-build: $(ZEPHYR_RISCV)
-
-.PHONY: zephyr
-zephyr:
+checkout:
 	git submodule update --init --recursive $(ZEPHYR_DIR)
-	rm -rf $(ZEPHYR_DIR)/.west
-	$(WEST) init -l $(ZEPHYR_DIR)
+	-$(WEST) init -l $(ZEPHYR_DIR)
 	cd $(ZEPHYR_DIR); $(WEST) update
 
-ZEPHYR_ELF ?= $(ZEPHYR_DIR)/build/zephyr/zephyr.elf
-
-$(ZEPHYR_ELF): $(ZEPHYR_DIR)
+$(ZEPHYR_ELF): checkout
 	cd $(ZEPHYR_DIR); $(WEST) build --pristine -b $(BOARD) $(APPLICATION)
 
 zephyr.riscv: $(ZEPHYR_ELF)
