@@ -60,8 +60,8 @@ $(ZEPHYR_TOOLCHAIN_GCC): $(ZEPHYR_SDK_DIR)/setup.sh
 $(ZEPHYR_BIN): $(ZEPHYR_TOOLCHAIN_GCC)
 	source $(VENV_DIR)/bin/activate && \
 		west build -p always -b $(BOARD) $(ZEPHYR_DIR)/$(APPLICATION_DIR)/$(APPLICATION) -- \
-		-DBOARD_ROOT=$(CUSTOM_DIR)/boards \
-		-DSOC_ROOT=$(CUSTOM_DIR)/soc
+		-DBOARD_ROOT=$(CUSTOM_ROOT) \
+		-DSOC_ROOT=$(CUSTOM_ROOT)
 	mv $(ZEPHYR_DIR)/build/zephyr/zephyr.elf $@
 
 test: $(ZEPHYR_BIN)
