@@ -1,0 +1,6 @@
+# Copyright (c) 2024 University of Washington
+# SPDX-License-Identifier: Apache-2.0
+
+config BOARD_BLACKPARROT
+    select SOC_BLACKPARROT
+    

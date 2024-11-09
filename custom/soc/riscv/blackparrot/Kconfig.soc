@@ -1,0 +1,7 @@
+
+config SOC_BLACKPARROT
+    bool
+
+config SOC
+    default "blackparrot" if SOC_BLACKPARROT
+

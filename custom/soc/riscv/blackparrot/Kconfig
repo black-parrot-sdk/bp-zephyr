@@ -1,0 +1,26 @@
+# Copyright (c) 2024 University of Washington
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_BLACKPARROT
+    bool
+
+    select 64BIT
+    select CPU_HAS_FPU_DOUBLE_PRECISION
+
+    # RISC-V options
+    select RISCV
+    select RISCV_PRIVILEGED
+
+    select ATOMIC_OPERATIONS_BUILTIN
+    select RISCV_ISA_RV64I
+    select RISCV_ISA_EXT_M
+    select RISCV_ISA_EXT_A
+    select RISCV_ISA_EXT_F
+    select RISCV_ISA_EXT_D
+    select RISCV_ISA_EXT_C
+    select RISCV_ISA_EXT_ZICSR
+    select RISCV_ISA_EXT_ZIFENCEI
+    select RISCV_ABI_LP64
+
+    select INCLUDE_RESET_VECTOR
+

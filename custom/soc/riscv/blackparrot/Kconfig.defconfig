@@ -1,0 +1,15 @@
+# Copyright (c) 2024 University of Washington
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_BLACKPARROT
+
+config SYS_CLOCK_HW_CYCLES_PER_SEC
+    default 10000000
+
+config RISCV_GP
+    default y
+
+config NUM_IRQS
+    default 64
+
+endif # SOC_BLACKPARROT
