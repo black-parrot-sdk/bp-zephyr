@@ -1,0 +1,5 @@
+
+config SOC_RISCV_BLACKPARROT
+    select RISCV
+    select CPU_HAS_FPU
+

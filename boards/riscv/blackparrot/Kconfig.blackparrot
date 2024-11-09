@@ -2,4 +2,5 @@
 # SPDX-License-Identifier: Apache-2.0
 
 config BOARD_RISCV_BLACKPARROT
+    bool "BlackParrot Board"
     select SOC_RISCV_BLACKPARROT

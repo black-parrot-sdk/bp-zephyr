@@ -1,4 +1,8 @@
 
+config SOC_RISCV_BLACKPARROT
+    bool "BlackParrot SoC"
+    select ARCH_RISCV
+
 config SOC
     default "riscv_blackparrot" if SOC_RISCV_BLACKPARROT
 

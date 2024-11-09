@@ -8,7 +8,6 @@ BP_SDK_BIN_DIR     ?= $(BP_SDK_INSTALL_DIR)/bin
 PATH := $(BP_SDK_BIN_DIR):$(PATH)
 
 BP_ZEPHYR_DIR      := $(BP_SDK_DIR)/zephyr
-BP_BOARD_DIR       := $(BP_ZEPHYR_DIR)/blackparrot
 
 ZEPHYR_DIR         := $(BP_ZEPHYR_DIR)/zephyr
 VENV_DIR           := $(BP_ZEPHYR_DIR)/.venv
@@ -55,12 +54,12 @@ $(ZEPHYR_TOOLCHAIN_GCC): $(ZEPHYR_SDK_DIR)/setup.sh
 	$< -t $(ZEPHYR_SDK_ARCH) -h -c
 	touch $@; # Update modification time
 
-export ZEPHYR_SDK_INSTALL_ROOT := $(ZEPHYR_SDK_DIR)
-export BOARD_ROOT := $(BP_ZEPHYR_DIR)
-export SOC_ROOT   := $(BP_ZEPHYR_DIR)
+#export ZEPHYR_SDK_INSTALL_ROOT := $(ZEPHYR_SDK_DIR)
 $(ZEPHYR_BIN): $(ZEPHYR_TOOLCHAIN_GCC)
 	source $(VENV_DIR)/bin/activate && \
-		west build -p always -b $(BOARD) $(ZEPHYR_DIR)/$(APPLICATION_DIR)/$(APPLICATION)
+		west build -p always -b $(BOARD) $(ZEPHYR_DIR)/$(APPLICATION_DIR)/$(APPLICATION) -- \
+		-DBOARD_ROOT=$(BP_ZEPHYR_DIR) \
+		-DSOC_ROOT=$(BP_ZEPHYR_DIR)
 	mv $(ZEPHYR_DIR)/build/zephyr/zephyr.elf $@
 
 test: $(ZEPHYR_BIN)
