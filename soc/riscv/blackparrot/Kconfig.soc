@@ -1,17 +1,4 @@
 
-config SOC_RISCV_BLACKPARROT
-    bool "BlackParrot implementation"
-	select 64BIT
-	select CPU_HAS_FPU_DOUBLE_PRECISION
-    select ATOMIC_OPERATIONS_BUILTIN
-    select INCLUDE_RESET_VECTOR
-    select RISCV
-    select RISCV_ISA_RV64I
-    select RISCV_ISA_EXT_M
-    select RISCV_ISA_EXT_A
-    select RISCV_ISA_EXT_F
-    select RISCV_ISA_EXT_D
-    select RISCV_ISA_EXT_C
-    select RISCV_ISA_EXT_ZICSR
-    select RISCV_ISA_EXT_ZIFENCEI
+config SOC
+    default "riscv_blackparrot" if SOC_RISCV_BLACKPARROT
 

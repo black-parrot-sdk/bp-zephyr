@@ -8,3 +8,4 @@ Python-*
 .venv/
 zephyr-sdk*
 zephyr/
+build/
