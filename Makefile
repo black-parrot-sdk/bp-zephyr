@@ -1,3 +1,4 @@
+$(error This target is deprecated. Help wanted to bring back up!)
 
 TOP                ?= $(shell git rev-parse --show-toplevel)
 BP_SDK_DIR         ?= $(TOP)/..
